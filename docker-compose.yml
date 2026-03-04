@@ -1,0 +1,27 @@
+services:
+  yolov9-export:
+    build:
+      context: ./yolov9
+    env_file:
+      - ./.env
+    environment:
+      YOLOV9_MODEL_SIZE: ${YOLOV9_MODEL_SIZE}
+      YOLOV9_IMG_SIZE: ${YOLOV9_IMG_SIZE}
+      YOLOV9_OPSET: ${YOLOV9_OPSET}
+    volumes:
+      - ${YOLOV9_OUTPUT_DIR}:/out
+      - ./yolov9/entrypoint.sh:/entrypoint.sh:ro
+    restart: "no"
+
+  yolonas-export:
+    build:
+      context: ./yolonas
+    env_file: .env
+    environment:
+      YOLONAS_IMG_SIZE: ${YOLONAS_IMG_SIZE}
+      YOLONAS_SIZE: ${YOLONAS_SIZE}
+    volumes:
+      - ${YOLONAS_OUTPUT_DIR}:/out
+      - ./yolonas/entrypoint.sh:/entrypoint.sh:ro
+      - ./yolonas/torch-cache:/root/.cache/torch
+    restart: "no"
