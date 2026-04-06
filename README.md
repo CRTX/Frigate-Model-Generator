@@ -14,7 +14,7 @@ docker compose run --rm yolonas-export
 docker compose run --rm yolov9-export
 ```
 
-## To use yolo-nas in your frigate config add:
+## To use yolo-v9 in your frigate config add:
 ### config.yaml
 ```yaml
 model:
